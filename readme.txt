@@ -26,6 +26,9 @@ This implementation uses [XCache](http://xcache.lighttpd.net/)'s variable cache 
 
 == Changelog ==
 
+= 1.0.2 =
+* Compatibility with WordPress 3.4 API
+
 = 1.0.1 =
 * Compatibility with [Batcache](http://wordpress.org/extend/plugins/batcache/)
 

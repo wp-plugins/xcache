@@ -3,7 +3,7 @@
 /**
  * Plugin Name: XCache Object Cache Backend
  * Description: XCache backend for the WordPress Object Cache.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Pierre Schmitz
  * Author URI: https://pierre-schmitz.com/
  * Plugin URI: http://wordpress.org/extend/plugins/xcache/
@@ -37,10 +37,10 @@ function wp_cache_flush() {
 	return $wp_object_cache->flush();
 }
 
-function wp_cache_get( $key, $group = '', $force = false ) {
+function wp_cache_get( $key, $group = '', $force = false, &$found = null ) {
 	global $wp_object_cache;
 
-	return $wp_object_cache->get( $key, $group, $force );
+	return $wp_object_cache->get( $key, $group, $force, $found );
 }
 
 function wp_cache_incr( $key, $offset = 1, $group = '' ) {
@@ -179,23 +179,28 @@ class XCache_Object_Cache {
 		return xcache_unset_by_prefix($this->prefix);
 	}
 
-	public function get( $key, $group = 'default', $force = false) {
+	public function get( $key, $group = 'default', $force = false, &$found = null) {
 		if (isset($this->local_cache[$group][$key])) {
+			$found = true;
 			if (is_object($this->local_cache[$group][$key])) {
 				return clone $this->local_cache[$group][$key];
 			} else {
 				return $this->local_cache[$group][$key];
 			}
 		} elseif (isset($this->non_persistent_groups[$group])) {
+			$found = false;
 			return false;
 		} else {
 			$value = unserialize(xcache_get($this->get_key($group, $key)));
 			if ($value !== false) {
+				$found = true;
 				if (is_object($value)) {
 					$this->local_cache[$group][$key] = clone $value;
 				} else {
 					$this->local_cache[$group][$key] = $value;
 				}
+			} else {
+				$found = false;
 			}
 			return $value;
 		}
