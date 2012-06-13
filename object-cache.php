@@ -3,7 +3,7 @@
 /**
  * Plugin Name: XCache Object Cache Backend
  * Description: XCache backend for the WordPress Object Cache.
- * Version: 1.0.3
+ * Version: 1.0.4
  * Author: Pierre Schmitz
  * Author URI: https://pierre-schmitz.com/
  * Plugin URI: http://wordpress.org/extend/plugins/xcache/
@@ -95,7 +95,12 @@ class XCache_Object_Cache {
 		global $table_prefix;
 
 		if ( !function_exists( 'xcache_get' ) ) {
-			wp_die( 'You do not have XCache installed, so you cannot use the XCache object cache backend. Please remove the <code>object-cache.php</code> file from your content directory.' );
+			$error = 'You do not have XCache installed, so you cannot use the XCache object cache backend. Please remove the <code>object-cache.php</code> file from your content directory.';
+			if (function_exists('wp_die')) {
+				wp_die($error);
+			} else {
+				die($error);
+			}
 		}
 
 		$this->prefix = DB_HOST.'.'.DB_NAME.'.'.$table_prefix;
