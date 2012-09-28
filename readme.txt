@@ -1,11 +1,11 @@
 === XCache Object Cache Backend ===
 Contributors: pierreschmitz
 Donate link: https://pierre-schmitz.com
-Stable tag: 1.0.3
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.3.0
-Tested up to: 3.4
+Tested up to: 3.5
 Tags: xcache, backend, cache, object cache, batcache, performance, speed
 
 An object-cache implementation using the XCache extension.
@@ -25,6 +25,9 @@ This implementation uses [XCache](http://xcache.lighttpd.net/)'s variable cache 
 1. Copy the file object-cache.php of this Plugin into your `/wp-content/` directory. Note that this file needs to be stored directly into your content directory and not under the plugins directory.
 
 == Changelog ==
+
+= 1.1.0 =
+* Compatibility with WordPress 3.5 API
 
 = 1.0.3 =
 * Compatibility with XCache < 1.3 which does not have the xcache_unset_by_prefix function
