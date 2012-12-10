@@ -1,7 +1,7 @@
 === XCache Object Cache Backend ===
 Contributors: pierreschmitz
 Donate link: https://pierre-schmitz.com
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.3.0
@@ -35,6 +35,11 @@ You will see this error message when either the xcache module is not loaded or t
 This error indicates that you likely have two copies of the object cache installed. Make sure you have put the file object-cache.php into your `/wp-content/` directory only. Do not upload it to the `/wp-content/plugins` direcotry or any subdirectory like `/wp-content/plugins/xcache`. The `XCache Object Cache Backend` is not a regular WordPress plugin but a `Drop-in`. Terefore you cannot store it into the `plugins` direcotry.
 
 == Changelog ==
+
+= 1.1.1 =
+* Check if the variable cache is correctly configured and enabled
+* Clarify the installation instructions
+* added answers to "Frequently Asked Questions"
 
 = 1.1.0 =
 * Compatibility with WordPress 3.5 API

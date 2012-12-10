@@ -3,10 +3,10 @@
 /**
  * Plugin Name: XCache Object Cache Backend
  * Description: XCache backend for the WordPress Object Cache.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Pierre Schmitz
  * Author URI: https://pierre-schmitz.com/
- * Plugin URI: http://wordpress.org/extend/plugins/xcache/
+ * Plugin URI: https://wordpress.org/extend/plugins/xcache/
  */
 
 function wp_cache_add($key, $data, $group = '', $expire = 0) {
