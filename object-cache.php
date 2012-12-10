@@ -277,7 +277,7 @@ class XCache_Object_Cache {
 	}
 
 	public function reset() {
-		// TODO: remove non-global groups
+		// This function is deprecated as of WordPress 3.5
 	}
 
 	public function set($key, $data, $group = 'default', $expire = '') {
