@@ -3,10 +3,10 @@
 /**
  * Plugin Name: XCache Object Cache Backend
  * Description: XCache backend for the WordPress Object Cache.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Pierre Schmitz
  * Author URI: https://pierre-schmitz.com/
- * Plugin URI: http://wordpress.org/extend/plugins/xcache/
+ * Plugin URI: https://wordpress.org/extend/plugins/xcache/
  */
 
 function wp_cache_add($key, $data, $group = '', $expire = 0) {
@@ -50,8 +50,8 @@ function wp_cache_incr($key, $offset = 1, $group = '') {
 }
 
 function wp_cache_init() {
-	if (!function_exists('xcache_get') || xcache_count(XC_TYPE_VAR) < 1) {
-		$error = 'XCache is not configured correctly. Please refer to https://wordpress.org/extend/plugins/xcache/installation/ for instrauctions.';
+	if (!function_exists('xcache_get') || intval(ini_get('xcache.var_size')) == 0) {
+		$error = 'XCache is not configured correctly. Please refer to https://wordpress.org/extend/plugins/xcache/installation/ for instructions.';
 		if (function_exists('wp_die')) {
 			wp_die($error);
 		} else {
@@ -277,7 +277,7 @@ class XCache_Object_Cache {
 	}
 
 	public function reset() {
-		// TODO: remove non-global groups
+		// This function is deprecated as of WordPress 3.5
 	}
 
 	public function set($key, $data, $group = 'default', $expire = '') {

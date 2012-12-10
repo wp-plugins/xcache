@@ -1,7 +1,7 @@
 === XCache Object Cache Backend ===
 Contributors: pierreschmitz
 Donate link: https://pierre-schmitz.com
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.3.0
@@ -21,10 +21,25 @@ This implementation uses [XCache](http://xcache.lighttpd.net/)'s variable cache 
 == Installation ==
 
 1. You need to install and configure the [XCache PHP extension](http://xcache.lighttpd.net/).
-1. Make sure to set a size for the xcache.var_size directive (e.g. `xcache.var_size=64M`)
-1. Copy the file object-cache.php of this Plugin into your `/wp-content/` directory. Note that this file needs to be stored directly into your content directory and not under the plugins directory.
+1. Make sure to set a size for the xcache.var_size directive (e.g. `xcache.var_size=64M`).
+1. Download and extract the content of the archive file.
+1. Upload the file object-cache.php of this plugin into your `/wp-content/` directory. Note that this file needs to be stored directly into your content directory and not under the plugins directory.
+1. This plugin should now work without any further configuration. Check if it is listed under `Plugins` -> `Installed Plugins` -> `Drop-ins`.
+
+== Frequently Asked Questions ==
+
+= "XCache is not configured correctly" =
+You will see this error message when either the xcache module is not loaded or the `xcache.var_size` directive is not set in your php.ini. If not configured, this setting defaults to 0 which disables the cache.
+
+= "Cannot redeclare wp_cache_add()..." =
+This error indicates that you likely have two copies of the object cache installed. Make sure you have put the file object-cache.php into your `/wp-content/` directory only. Do not upload it to the `/wp-content/plugins` direcotry or any subdirectory like `/wp-content/plugins/xcache`. The `XCache Object Cache Backend` is not a regular WordPress plugin but a `Drop-in`. Terefore you cannot store it into the `plugins` direcotry.
 
 == Changelog ==
+
+= 1.1.1 =
+* Check if the variable cache is correctly configured and enabled
+* Clarify the installation instructions
+* added answers to "Frequently Asked Questions"
 
 = 1.1.0 =
 * Compatibility with WordPress 3.5 API
