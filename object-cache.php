@@ -3,7 +3,7 @@
 /**
  * Plugin Name: XCache Object Cache Backend
  * Description: XCache backend for the WordPress Object Cache.
- * Version: 1.1.1
+ * Version: 1.1.2
  * Author: Pierre Schmitz
  * Author URI: https://pierre-schmitz.com/
  * Plugin URI: https://wordpress.org/extend/plugins/xcache/
