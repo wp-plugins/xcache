@@ -53,8 +53,10 @@ function wp_cache_init() {
 	if (!function_exists('xcache_get') || intval(ini_get('xcache.var_size')) == 0) {
 		$error = 'XCache is not configured correctly. Please refer to https://wordpress.org/extend/plugins/xcache/installation/ for instructions.';
 		if (function_exists('wp_die')) {
-			wp_die($error);
+			wp_die($error, 'XCache Object Cache', array('response' => 503));
 		} else {
+			header('HTTP/1.0 503 Service Unavailable');
+			header('Content-Type: text/plain; charset=UTF-8');
 			die($error);
 		}
 	} else {
