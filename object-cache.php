@@ -3,7 +3,7 @@
 /**
  * Plugin Name: XCache Object Cache Backend
  * Description: XCache backend for the WordPress Object Cache.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: Pierre Schmitz
  * Author URI: https://pierre-schmitz.com/
  * Plugin URI: https://wordpress.org/extend/plugins/xcache/
@@ -12,7 +12,7 @@
 function wp_cache_add($key, $data, $group = '', $expire = 0) {
 	global $wp_object_cache;
 
-	return $wp_object_cache->add($key, $data, $group, $expire);
+	return $wp_object_cache->add($key, $data, $group, (int) $expire);
 }
 
 function wp_cache_close() {
@@ -67,13 +67,13 @@ function wp_cache_init() {
 function wp_cache_replace($key, $data, $group = '', $expire = 0) {
 	global $wp_object_cache;
 
-	return $wp_object_cache->replace($key, $data, $group, $expire);
+	return $wp_object_cache->replace($key, $data, $group, (int) $expire);
 }
 
 function wp_cache_set($key, $data, $group = '', $expire = 0) {
 	global $wp_object_cache;
 
-	return $wp_object_cache->set($key, $data, $group, $expire);
+	return $wp_object_cache->set($key, $data, $group, (int) $expire);
 }
 
 function wp_cache_switch_to_blog($blog_id) {
@@ -129,7 +129,7 @@ class XCache_Object_Cache {
 		}
 	}
 
-	public function add($key, $data, $group = 'default', $expire = '') {
+	public function add($key, $data, $group = 'default', $expire = 0) {
 		$group = $this->get_group($group);
 
 		if (function_exists('wp_suspend_cache_addition') && wp_suspend_cache_addition()) {
@@ -149,7 +149,7 @@ class XCache_Object_Cache {
 		}
 
 		if (!isset($this->non_persistent_groups[$group])) {
-			return xcache_set($this->get_key($group, $key), serialize($data), $expire);
+			return xcache_set($this->get_key($group, $key), serialize($data), (int) $expire);
 		}
 
 		return true;
@@ -255,7 +255,7 @@ class XCache_Object_Cache {
 		}
 	}
 
-	public function replace($key, $data, $group = 'default', $expire = '') {
+	public function replace($key, $data, $group = 'default', $expire = 0) {
 		$group = $this->get_group($group);
 
 		if (isset($this->non_persistent_groups[$group])) {
@@ -266,7 +266,7 @@ class XCache_Object_Cache {
 			if (!isset($this->local_cache[$group][$key]) && !xcache_isset($this->get_key($group, $key))) {
 				return false;
 			}
-			xcache_set($this->get_key($group, $key), serialize($data), $expire);
+			xcache_set($this->get_key($group, $key), serialize($data), (int) $expire);
 		}
 
 		if (is_object($data)) {
@@ -282,7 +282,7 @@ class XCache_Object_Cache {
 		// This function is deprecated as of WordPress 3.5
 	}
 
-	public function set($key, $data, $group = 'default', $expire = '') {
+	public function set($key, $data, $group = 'default', $expire = 0) {
 		$group = $this->get_group($group);
 
 		if (is_object($data)) {
@@ -292,7 +292,7 @@ class XCache_Object_Cache {
 		}
 
 		if (!isset($this->non_persistent_groups[$group])) {
-			return xcache_set($this->get_key($group, $key), serialize($data), $expire);
+			return xcache_set($this->get_key($group, $key), serialize($data), (int) $expire);
 		}
 
 		return true;
