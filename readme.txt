@@ -1,7 +1,7 @@
 === XCache Object Cache Backend ===
 Contributors: pierreschmitz
 Donate link: https://pierre-schmitz.com
-Stable tag: 1.1.3
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.3.0
@@ -35,6 +35,14 @@ You will see this error message when either the xcache module is not loaded or t
 This error indicates that you likely have two copies of the object cache installed. Make sure you have put the file object-cache.php into your `/wp-content/` directory only. Do not upload it to the `/wp-content/plugins` direcotry or any subdirectory like `/wp-content/plugins/xcache`. The `XCache Object Cache Backend` is not a regular WordPress plugin but a `Drop-in`. Terefore you cannot store it into the `plugins` direcotry.
 
 == Changelog ==
+
+= 1.2.0 =
+* Support WordPress Multisite setup
+* Add [PHPUnit](http://phpunit.de/manual/current/en/index.html) test to ensure compatibility
+* die() when people mistakenly try to activate this as a plugin, and provide a helpful message for where they should move the file. (from APC backend)
+* Fix incr() and decr() functions used. This fixes issues with BatCache and other plugins.
+* Fix $force option in get() function
+* Fix legacy use of reset() function
 
 = 1.1.3 =
 * Fix type of $expire parameter
