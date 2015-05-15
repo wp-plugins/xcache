@@ -1,12 +1,16 @@
 language: php
 
 php:
+  - 5.3
   - 5.4
   - 5.5
   - 5.6
+  - 7
 
 before_install:
   - wget http://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz
+  - wget http://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz.md5.txt
+  - md5sum -c xcache-3.2.0.tar.gz.md5.txt
   - tar xf xcache-3.2.0.tar.gz
   - pushd xcache-3.2.0
   - phpize
@@ -16,3 +20,9 @@ before_install:
   - popd
   - printf "extension=xcache.so\nxcache.var_size=1M" > xcache.ini
   - phpenv config-add xcache.ini
+
+install:
+  - composer install
+
+script:
+  - composer test
