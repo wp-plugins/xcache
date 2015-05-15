@@ -36,7 +36,7 @@ before_install:
   - make
   - make install
   - popd
-  - printf "extension=xcache.so\nxcache.size=16M\nxcache.var_size=16M\xcache.test=On" > xcache.ini
+  - printf "extension=xcache.so\nxcache.size=16M\nxcache.var_size=16M\nxcache.test=On" > xcache.ini
   - phpenv config-add xcache.ini
 
 install:
