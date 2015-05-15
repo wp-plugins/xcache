@@ -7,7 +7,13 @@ php:
   - 5.6
 
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y php5-xcache
+  - wget http://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz
+  - tar xf xcache-3.2.0.tar.gz
+  - pushd xcache-3.2.0
+  - phpize
+  - ./configure
+  - make
+  - sudo make install
+  - popd
   - printf "extension=xcache.so\nxcache.var_size=1M" > xcache.ini
   - phpenv config-add xcache.ini
