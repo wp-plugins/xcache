@@ -34,7 +34,7 @@ before_install:
   - phpize
   - ./configure
   - make
-  - make test
+  - NO_INTERACTION=1 make test
   - make install
   - popd
   - printf "extension=xcache.so\nxcache.size=64M\nxcache.var_size=16M\nxcache.test=On" > xcache.ini
